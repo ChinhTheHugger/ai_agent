@@ -17,6 +17,13 @@ def get_perception_instructions() -> str:
         f"{{\"location\": \"string\", \"time\": \"string\"}} or {{\"error\": \"reason\"}}"
     )
 
+def parse_perception_output(raw_text: str) -> dict:
+    """Safely decodes raw string text into structured Python dictionaries."""
+    try:
+        return json.loads(raw_text)
+    except json.JSONDecodeError:
+        return {"error": "Format violation: Perception string was not valid JSON."}
+
 def parse_raw_api_weather(raw_json_text: str) -> str:
     """
     New Perception Job: Takes the massive, raw OpenWeather text response 
