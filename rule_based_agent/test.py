@@ -1,18 +1,11 @@
 import json
 
-# =====================================================================
-# 1. THE TOOLS (Capabilities)
-# =====================================================================
 def turn_on_light(room: str) -> str:
     return f"Success: The light in the {room} has been turned ON."
 
 def set_thermostat(temperature: int) -> str:
     return f"Success: Thermostat target set to {temperature}°C."
 
-
-# =====================================================================
-# 2. THE BRAIN (Rule-Based Classifier)
-# =====================================================================
 def rule_based_brain(user_input: str) -> str:
     """
     Acts like the LLM but uses rigid string rules.
@@ -53,10 +46,6 @@ def rule_based_brain(user_input: str) -> str:
         
     return json.dumps(response)
 
-
-# =====================================================================
-# 3. THE AGENT (The Middleman Loop)
-# =====================================================================
 def run_agent_loop(user_query: str):
     print(f"\n[User]: {user_query}")
     
@@ -94,9 +83,6 @@ def run_agent_loop(user_query: str):
         print(f"[Tool Output Received]: {tool_result}")
         print(f"[Agent Final Answer]: Task completed successfully. {tool_result}")
 
-# =====================================================================
-# RUNNING THE SIMULATION
-# =====================================================================
 if __name__ == "__main__":
     # Test Case 1: Valid Light Command
     run_agent_loop("Please turn on the light in the kitchen")
