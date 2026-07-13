@@ -1,11 +1,20 @@
 import requests
+from pathlib import Path
+import json
 
-# OpenWeather
-API_KEY = 'e1614efbfe8be4797e83cfadf361631f'
-res = requests.get(f'https://api.openweathermap.org/data/4.0/onecall/current?lat=52.2297&lon=21.0122&units=metric&lang=en&appid={API_KEY}')
+current_dir = Path(__file__).resolve()
+api_key_dir = current_dir.parent.parent / "file" / "weather_api_key.json"
 
-# # WeatherAPI
-# API_KEY = '8c95e631d17446f0af4121245261007'
-# res = requests.get(f'http://api.weatherapi.com/v1/current.json?key={API_KEY}&q=Tokyo')
+with open(api_key_dir, 'r') as file:
+    data = json.load(file)
 
-print(res.json())
+# # OpenWeather
+# res = requests.get(f'''https://api.openweathermap.org/data/2.5/onecall/weather?lat=52.2297&lon=21.0122&units=metric&lang=en&appid={data['OpenWeather']}''')
+
+# WeatherAPI
+res = requests.get(f'''http://api.weatherapi.com/v1/current.json?key={data['WeatherAPI']}&q=35.68388282018455,139.6927064529045''')
+
+# # Open-Meteo
+# res = requests.get('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m')
+
+print(res.text)
