@@ -17,11 +17,8 @@ def request_extraction(system_prompt: str, user_prompt: str) -> str:
     except Exception as e:
         return f'{{"error": "Failed to connect to Ollama: {str(e)}"}}'
 
-def request_natural_language(user_query: str, tool_observation: str) -> str:
+def request_natural_language(system_prompt: str, user_query: str, tool_observation: str) -> str:
     """Asks DeepSeek to convert raw tool data into a polished, human-friendly response."""
-    system_prompt = (
-        "Convert the raw tool observation into a friendly, natural language answer matching the language of the user's query."
-    )
     user_context = f"User asked: '{user_query}'\nRaw tool observation: '{tool_observation}'"
     
     try:

@@ -2,7 +2,7 @@ import requests
 from pathlib import Path
 import json
 
-def current_weather_api(location: dict, time: str = "current") -> str:
+def current_weather_api(location: dict) -> str:
     """
     Action Tool: Fetches raw weather data from external weather service.
     Expects location dict containing {'lat': float, 'lon': float}
